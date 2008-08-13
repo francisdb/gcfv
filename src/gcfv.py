@@ -51,7 +51,7 @@ class Work (Thread):
         dirname = self.escape(os.path.dirname(self.path))        
         pathname = self.escape(self.path)
         # TODO readd -n ?
-        return "cfv -v -p %s --strippaths=all --progress=no --showpaths=none -f %s" % (dirname, pathname)
+        return "cfv -v -i -p %s --strippaths=all --progress=no --showpaths=none -f %s" % (dirname, pathname)
     
     def escape(self, path):
         path = path.replace('(','\(')

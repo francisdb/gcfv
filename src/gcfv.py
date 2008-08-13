@@ -35,6 +35,7 @@ import subprocess
 
 
 class Work (Thread):
+    """ GTK cfv worker thread """
     path = None
     cfvGtk = None
     def __init__(self, cfvGtk, path):

@@ -1,5 +1,15 @@
 #!/usr/bin/env python
 
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; version 3 of the License.
+# 
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+
+
 import pexpect
 
 
@@ -50,11 +60,11 @@ class Work (Thread):
     
     def call(self, command):
         
-        ok_exp = '[^\r\n]+OK.\\([0-9a-f]+\\)\r\n'
-        missing_exp = '[^\r\n]+No such file or directory\r\n'
-        crc_fail_exp = '[^\r\n]+crc does not match[^\r\n]+\r\n'
-        last_exp = '[^\r\n]+files[^\r\n]+\r\n'
-        any_line_exp = '[^\r\n]+\r\n'
+        EXP_OK = '[^\r\n]+OK.\\([0-9a-f]+\\)\r\n'
+        EXP_MISSING = '[^\r\n]+No such file or directory\r\n'
+        EXP_CRC_FAIL = '[^\r\n]+crc does not match[^\r\n]+\r\n'
+        EXP_LAST = '[^\r\n]+files[^\r\n]+\r\n'
+        EXP_ANY_LINE = '[^\r\n]+\r\n'
         
         #http://www.noah.org/wiki/Pexpect#Examples
         try:
@@ -63,7 +73,7 @@ class Work (Thread):
             done = False
             while not done:
                 # We expect any of these patterns
-                i = child.expect ([ok_exp, missing_exp, crc_fail_exp, last_exp, any_line_exp])
+                i = child.expect ([EXP_OK, EXP_MISSING, EXP_CRC_FAIL, EXP_LAST, EXP_ANY_LINE])
                 line = child.after
                 if i == 0:
                     self.update_txt(line, "darkgreen")
